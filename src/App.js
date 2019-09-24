@@ -27,12 +27,35 @@ function App(props) {
       isValid:!userList.isValid
     })
   }
+  const deleteUserList =  (index) =>{ 
+    console.log(index);
+    let toggleColors={...toggleStyles};
+    toggleColors.backgroundColor='#fffff';
+    toggleStyles={...toggleColors}
+    const persons = [...userList.userData]; 
+    if (index !== -1) { 
+      persons.splice(index, 1); 
+    setUserList({userData:persons})
+    }  
+  }   
+
+
+  //Toggle styling here
+  const toggleStyles={
+    backgroundColor:"red",
+    border:"none",
+    color:'#ffffff',
+    borderRadius:"10px",
+    padding:'10px',
+    marginTop:'10px',
+    outline:'none'
+  }
   return (
     <div className="App">
-        <button onClick={changeUserData}>Toggle Userdata</button>
+        <button onClick={changeUserData} className={"class123 "+(userList.isValid==true ? "class1":"class2")+""}> Toggle Userdata</button>
       <ul> 
         { userList.userData && 
-          <Users userList= {userList.userData}/>
+          <Users userList= {userList.userData} deleteUser={(index)=>deleteUserList(index)}/>
         }
         </ul> 
     </div>
